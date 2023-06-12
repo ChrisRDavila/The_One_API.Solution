@@ -372,4 +372,4 @@ FodyWeavers.xsd
 #*.fsproj
 
 appsettings.json
-EnvironmetVariables
+EnvironmentVariables.cs
