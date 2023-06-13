@@ -2,47 +2,58 @@ using System.Threading.Tasks;
 using System;
 using RestSharp;
 using RestSharp.Authenticators;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace The_One_API.Services
 {
-  class QuotesHelper
+  public class QuotesHelper
   {
-    public static async Task<string> GetAllGandalfQuotes(string TheOneApiKey)
+    private readonly HttpClient _httpClient;
+
+    public QuotesHelper(HttpClient httpClient)
+    {
+      _httpClient = httpClient;
+    }
+    public static async Task<string> GetAllCharQuotes(string ApiKey, string CharacterId)
     {
       RestClient client = new RestClient($"https://the-one-api.dev/v2/");
-      RestRequest request = new RestRequest($"character/{GandalfCharId}/quote");
-      request.AddHeader("Authorization", $"Bearer {TheOneApiKey}");
-      // client.AddDefaultHeader("Authorization", string.Format("Bearer {0}",TheOneApiKey));
+      RestRequest request = new RestRequest($"character/{CharacterId}/quote");
+      request.AddHeader("Authorization", $"Bearer {ApiKey}");
+
       RestResponse response = await client.GetAsync(request);
-      return response.dialogue;
+      return response.Content;
     }
 
-    public static async Task<string> GetRandomQuote(string TheOneApiKey)
+    public static async Task<string> GetRandomQuote(string ApiKey, string CharacterId)
     {
-      string QuoteId = RandomNumberGenerator.GenerateRandomNumber();
+      RestClient client = new RestClient($"https://the-one-api.dev/v2/");
+      RestRequest request = new RestRequest($"character/{CharacterId}/quote");
+      request.AddHeader("Authorization", $"Bearer {ApiKey}");
+
+      RestResponse response = await client.GetAsync(request);
+      List<string> quotes = JsonConvert.DeserializeObject<List<string>>(response.Content);
+
+      if (quotes.Count == 0)
+      {
+        return "No quotes available.";
+      }
 
       Random random = new Random();
-      
+      int randomIndex = random.Next(quotes.Count);
+      string RandomQuote = quotes[randomIndex];
 
-      RestClient client = new RestClient($"https://the-one-api.dev/v2/");
-      RestRequest request = new RestRequest($"character/{GandalfCharId}/quote");
-      request.AddHeader("Authorization", $"Bearer {TheOneApiKey}");
-      RestResponse response = await client.GetAsync(request);
-
-      int index = random.Next(response.Count);
-
-      return response.dialogue[index];
+      return RandomQuote;
     }
   }
 
-  public class RandomNumberGenerator
-  {
-    private static Random random = new Random();
+  // public class RandomNumberGenerator
+  // {
+  //   private static Random random = new Random();
 
-    public static int GenerateRandomNumber()
-    {
-      return random.Next(1, 217);
-    }
-  }
+  //   public static int GenerateRandomNumber()
+  //   {
+  //     return random.Next(1, 217);
+  //   }
+  // }
 }

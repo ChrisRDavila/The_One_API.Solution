@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tweetinvi;
 using Tweetinvi.Auth;
 using Tweetinvi.Parameters;
+using The_One_API.Services;
 
 namespace The_One_API.Controllers
 {
@@ -25,7 +26,7 @@ namespace The_One_API.Controllers
 
         private static ITwitterClient GetAppClient()
         {
-            var appCreds = MyCredentials.GenerateAppCreds();
+            var appCreds = TwitterApiHelper.GenerateAppCreds();
             return new TwitterClient(appCreds);
         }
 

@@ -1,21 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using ProjectName.Models;
+using The_One_API.Models;
+using The_One_API.Services;
 using System.Collections.Generic;
 using System.Linq;
-
+using Tweetinvi;
+using Tweetinvi.Models;
+using Tweetinvi.Parameters;
 
 namespace The_One_API.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class TwitterController : ControllerBase
+  public class TweetsController : ControllerBase
   {
-    private readonly TwitterContext _db;
+    private readonly The_One_APIContext _db;
+    private readonly TwitterApiHelper _twitterApiHelper;
+    private readonly QuotesHelper _quotesHelper;
 
-    public TwitterController(TwitterContext db)
+
+    public TweetsController(The_One_APIContext db, TwitterApiHelper twitterApiHelper, QuotesHelper quotesHelper)
     {
       _db = db;
+      _twitterApiHelper = twitterApiHelper;
+      _quotesHelper = quotesHelper;
     }
 
     [HttpGet]
@@ -51,6 +59,11 @@ namespace The_One_API.Controllers
       var tweetToDelete = _db.Tweets.FirstOrDefault(entry => entry.TweetId == id);
       _db.Tweets.Remove(tweetToDelete);
       _db.SaveChanges();
-    }    
+    }
+
+    internal Task Post()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

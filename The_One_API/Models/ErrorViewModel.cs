@@ -1,9 +1,10 @@
-namespace Examplinvi.ASP.NET.Core.Models
-{
-    public class ErrorViewModel
-    {
-        public string RequestId { get; set; }
+#nullable enable
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+namespace The_One_API.Models;
+
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
