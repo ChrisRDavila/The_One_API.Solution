@@ -1,8 +1,8 @@
-# (Application Name) remove parens
+# The One API
 
-#### (Brief Description of Application) remove parens
+#### This is a twitter bot that posts randomized qoutes from Galndalf the White as per Tolkein related material
 
-#### By (Your Name Here) remove parans
+#### By By Christopher Davila, Joseph Wilfong, Marcus Kyung, Gareth Grindeland and Laura Hope
 
 ## Technologies Used
 
@@ -10,16 +10,20 @@
 * _cshtml_
 * _C#_
 * _ASP Core MVC_
-_MS Build_
+* _MS Build_
+* _Newtonsoft_
+* _RestSharp_
+* _Tweetinvi_
+* _TweetSharp_
 
 
 ## Description
 
+# This is a Twitter Bot using C# dotnet avc framewrok that will post randomized qoutes by the character Galdalf from all JRR Tolkein material. 
+
 ## Setup/Installation Requirements
 
-<!-- Going forward, don't forget to include setup instructions in your README for an appsettings.json with a database connection string. -->
-
-* _1. Clone this repo._
+* _1. ._
 * _X. _dotnet add package MySqlConnector -v 2.2.0_
 * _8. _create the file appsettings.json, and what code to include in it. We recommend using the above formatting and directing users to replace [YOUR-USERNAME-HERE] and [YOUR-PASSWORD-HERE] with the user's own user and password values. also add [YOUR-DB-NAME] with database used_
 * _this format -> 
@@ -42,4 +46,4 @@ _MS Build_
 * _should go here_
 
 ## License
-[MIT](https://yourlicesnepage)
+[MIT](https://yourlicensepage)

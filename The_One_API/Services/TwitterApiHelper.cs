@@ -9,7 +9,7 @@ namespace The_One_API.Services
   {
     private readonly TwitterClient _twitterClient;
     private readonly HttpClient _httpClient;
-
+    
     public TwitterApiHelper(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret, HttpClient httpClient)
     {
       var credentials = new TwitterCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);

@@ -23,10 +23,11 @@ namespace The_One_API
       string consumerKey = configuration["Twitter:ConsumerKey"];
       string consumerSecret = configuration["Twitter:ConsumerSecret"];
       string accessToken = configuration["Twitter:AccessToken"];
-      string accessTokenSecret = configuration["Twitter:AccessTokenSecret"];
+      string accessSecret = configuration["Twitter:AccessSecret"];
 
       var quotesHelper = new QuotesHelper(new System.Net.Http.HttpClient());
-      var twitterApiHelper = new TwitterApiHelper(consumerKey, consumerSecret, accessToken, accessTokenSecret, new System.Net.Http.HttpClient());
+      var twitterApiHelper = new TwitterApiHelper(consumerKey, consumerSecret, accessToken, accessSecret, new System.Net.Http.HttpClient());
+      var characterQuote = new CharacterQuote();
 
       var connectionString = configuration["ConnectionStrings:DefaultConnection"];
 
@@ -35,13 +36,21 @@ namespace The_One_API
 
       var dbContext = new The_One_APIContext(dbContextOptionsBuilder.Options);
 
-      var controller = new TweetsController(dbContext, twitterApiHelper, quotesHelper);
+      var controller = new TweetsController(dbContext, twitterApiHelper, characterQuote);
 
       await controller.Post();
 
       while (true)
       {
-        await controller.Post();
+        try
+        {
+          await controller.PostQuote();
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine(ex.Message);
+          break;
+        }
         await Task.Delay(TimeSpan.FromMinutes(10));
       }
     }

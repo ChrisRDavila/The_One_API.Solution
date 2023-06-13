@@ -7,6 +7,7 @@ using System.Linq;
 using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
+using The_One_API.Keys;
 
 namespace The_One_API.Controllers
 {
@@ -16,14 +17,14 @@ namespace The_One_API.Controllers
   {
     private readonly The_One_APIContext _db;
     private readonly TwitterApiHelper _twitterApiHelper;
-    private readonly QuotesHelper _quotesHelper;
+    private readonly CharacterQuote _characterQuote;
 
 
-    public TweetsController(The_One_APIContext db, TwitterApiHelper twitterApiHelper, QuotesHelper quotesHelper)
+    public TweetsController(The_One_APIContext db, TwitterApiHelper twitterApiHelper, CharacterQuote characterQuote)
     {
       _db = db;
       _twitterApiHelper = twitterApiHelper;
-      _quotesHelper = quotesHelper;
+      _characterQuote = characterQuote;
     }
 
     [HttpGet]
@@ -59,6 +60,25 @@ namespace The_One_API.Controllers
       var tweetToDelete = _db.Tweets.FirstOrDefault(entry => entry.TweetId == id);
       _db.Tweets.Remove(tweetToDelete);
       _db.SaveChanges();
+    }
+
+    [HttpGet("post-quote")]
+    public async Task<ActionResult> PostQuote()
+    {
+      try
+      {
+        string quote =_characterQuote.GetRandomGandalfQuote(EnvironmentVariables.TheOneApiKey, EnvironmentVariables.GandalfCharId);
+
+        
+
+        await _twitterApiHelper.PostTweet(quote);
+
+        return Ok("Quote posted to Twitter successfully");
+      }
+      catch (Exception ex)
+      {
+        return BadRequest("An error occurred while trying to post quote to Twitter: " + ex.Message);
+      }
     }
 
     internal Task Post()

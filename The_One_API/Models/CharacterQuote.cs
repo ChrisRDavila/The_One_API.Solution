@@ -21,9 +21,9 @@ namespace The_One_API.Models
     public string Character { get; set; }
   
 
-    public static List<CharacterQuote> GetGandalfQuotes(string theOneApiKey, string gandalfCharId)
+    public List<CharacterQuote> GetGandalfQuotes(string apiKey, string gandalfCharId)
     {
-      var apiCallTask = QuotesHelper.GetAllCharQuotes(theOneApiKey, gandalfCharId);
+      var apiCallTask = QuotesHelper.GetAllCharQuotes(apiKey, gandalfCharId);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
@@ -38,9 +38,9 @@ namespace The_One_API.Models
       return characterQuoteList;
     }
 
-    public static string GetRandomGandalfQuote(string theOneApiKey, string gandalfCharId)
+    public string GetRandomGandalfQuote(string apiKey, string gandalfCharId)
     {
-      var apiCallTask = QuotesHelper.GetAllCharQuotes(theOneApiKey, gandalfCharId);
+      var apiCallTask = QuotesHelper.GetAllCharQuotes(apiKey, gandalfCharId);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JObject.Parse(result);

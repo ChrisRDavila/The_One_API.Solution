@@ -15,36 +15,36 @@ namespace The_One_API.Services
     {
       _httpClient = httpClient;
     }
-    public static async Task<string> GetAllCharQuotes(string ApiKey, string CharacterId)
+    public static async Task<string> GetAllCharQuotes(string apiKey, string characterId)
     {
       RestClient client = new RestClient($"https://the-one-api.dev/v2/");
-      RestRequest request = new RestRequest($"character/{CharacterId}/quote");
-      request.AddHeader("Authorization", $"Bearer {ApiKey}");
+      RestRequest request = new RestRequest($"character/{characterId}/quote");
+      request.AddHeader("Authorization", $"Bearer {apiKey}");
 
       RestResponse response = await client.GetAsync(request);
       return response.Content;
     }
 
-    public static async Task<string> GetRandomQuote(string ApiKey, string CharacterId)
-    {
-      RestClient client = new RestClient($"https://the-one-api.dev/v2/");
-      RestRequest request = new RestRequest($"character/{CharacterId}/quote");
-      request.AddHeader("Authorization", $"Bearer {ApiKey}");
+    // public static async Task<string> GetRandomQuote(string apiKey, string characterId)
+    // {
+    //   RestClient client = new RestClient($"https://the-one-api.dev/v2/");
+    //   RestRequest request = new RestRequest($"character/{characterId}/quote");
+    //   request.AddHeader("Authorization", $"Bearer {apiKey}");
 
-      RestResponse response = await client.GetAsync(request);
-      List<string> quotes = JsonConvert.DeserializeObject<List<string>>(response.Content);
+    //   RestResponse response = await client.GetAsync(request);
+    //   List<string> quotes = JsonConvert.DeserializeObject<List<string>>(response.Content);
 
-      if (quotes.Count == 0)
-      {
-        return "No quotes available.";
-      }
+    //   if (quotes.Count == 0)
+    //   {
+    //     return "No quotes available.";
+    //   }
 
-      Random random = new Random();
-      int randomIndex = random.Next(quotes.Count);
-      string RandomQuote = quotes[randomIndex];
+    //   Random random = new Random();
+    //   int randomIndex = random.Next(quotes.Count);
+    //   string RandomQuote = quotes[randomIndex];
 
-      return RandomQuote;
-    }
+    //   return RandomQuote;
+    // }
   }
 
   // public class RandomNumberGenerator
