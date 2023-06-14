@@ -6,13 +6,18 @@ using The_One_API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Tweetinvi.Parameters;
+using Microsoft.AspNetCore.Mvc;
+using Tweetinvi;
+using Tweetinvi.Models;
+
+
 
 
 namespace The_One_API
 {
   class Program
   {
-    static async void Main(string[] args)
+    static async Task Main(string[] args)
     {
       var builder = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -36,23 +41,25 @@ namespace The_One_API
 
       var dbContext = new The_One_APIContext(dbContextOptionsBuilder.Options);
 
-      var controller = new TweetsController(dbContext, twitterApiHelper, characterQuote);
+      // var controller = new TweetsController(dbContext, twitterApiHelper, characterQuote);
+      string message = "This is Gandalf!";
+      ITweet tweet = await twitterApiHelper.PostTweet(message);
 
-      await controller.Post();
+      // controller.PostQuote();
 
-      while (true)
-      {
-        try
-        {
-          await controller.PostQuote();
-        }
-        catch (Exception ex)
-        {
-          Console.WriteLine(ex.Message);
-          break;
-        }
-        await Task.Delay(TimeSpan.FromMinutes(10));
-      }
+      // while (true)
+      // {
+      //   try
+      //   {
+      //     await controller.PostQuote();
+      //   }
+      //   catch (Exception ex)
+      //   {
+      //     Console.WriteLine(ex.Message);
+      //     break;
+      //   }
+      //   await Task.Delay(TimeSpan.FromMinutes(10));
+      // }
     }
   }
 }

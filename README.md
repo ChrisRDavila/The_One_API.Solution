@@ -19,11 +19,11 @@
 
 ## Description
 
-# This is a Twitter Bot using C# dotnet avc framewrok that will post randomized qoutes by the character Galdalf from all JRR Tolkein material. 
+# This is a Twitter Bot using C# dotnet avc framework that will post randomized qoutes by the character Ganldalf from all JRR Tolkein material. Once mentioned it is set up to post a reply in 10 minutes 
 
 ## Setup/Installation Requirements
 
-* _1. ._
+* _1_
 * _X. _dotnet add package MySqlConnector -v 2.2.0_
 * _8. _create the file appsettings.json, and what code to include in it. We recommend using the above formatting and directing users to replace [YOUR-USERNAME-HERE] and [YOUR-PASSWORD-HERE] with the user's own user and password values. also add [YOUR-DB-NAME] with database used_
 * _this format -> 

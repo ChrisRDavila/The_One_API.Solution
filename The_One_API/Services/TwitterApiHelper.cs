@@ -2,6 +2,15 @@ using System.Threading.Tasks;
 using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace The_One_API.Services
 {
@@ -28,10 +37,19 @@ namespace The_One_API.Services
       var userCreds = GenerateCredentials();
       return new TwitterCredentials(userCreds.ConsumerKey, userCreds.ConsumerSecret);
     }
-    public async Task<ITweet> PostTweet(string message)
+    public async Task<ITweet> PostTweet(string quote)
     {
-      return await _twitterClient.Tweets.PublishTweetAsync(message);
+      if (quote.Length > 280)
+      {
+        quote = quote.Substring(0, 280 - 3) + "...";
+      }
+
+      return await _twitterClient.Tweets.PublishTweetAsync(new PublishTweetParameters(quote));
     }
+    // public async Task PostReply()
+    // {
+      
+    // }
     public async Task<IUser> GetUser(string username)
     {
       return await _twitterClient.Users.GetUserAsync(username);
