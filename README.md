@@ -2,28 +2,28 @@
 
 <img src="https://media4.giphy.com/media/TcdpZwYDPlWXC/giphy.gif?cid=ecf05e479jyx7jzqd30zruug6tlr6zew54q7ut1gdy0ctnuk&ep=v1_gifs_search&rid=giphy.gif&ct=g" width="200"/>
 
-_This application uses a the Twitter API to post randomized quotes from Gandalf the White as per Tolkien-related material_
+_This application uses a Twitter API to post randomized quotes from Gandalf as per Tolkien-related material via The One API (Lord of the Rings-themed API)_
 
 #### By **Christopher Davila, Joseph Wilfong, Marcus Kyung, Gareth Grindeland and Laura Hope**
 
 ## Table of Contents
-* [Technologies Used](#technologies-used)
-* [Description](#description)
-* [Setup & installation](#setupinstallation-requirements)
-* [Known-bugs](#known-bugs)
-* [License](#license)
+* 💍 [Technologies Used](#technologies-used)🌋
+* 💍 [Description](#description)🌋
+* 💍 [Setup & installation](#setupinstallation-requirements)🌋
+* 💍 [Known-bugs](#known-bugs)🌋
+* 💍 [License](#license)🌋
 
 ## Technologies Used
 
-* _MS EF Core v6.0.0_
-* _MS EF Core Design v6.0.0_
+* _MS EF Core v 6.0.0_
+* _MS EF Core Design v 6.0.0_
 * _C#/.NET_
 * _ASP Core MVC_
-* _Newtonsoft.Json v13.0.2_
-* _RestSharp v108.0.3_
-* _TweetinviAPI v5.0.4_
+* _Newtonsoft.Json v 13.0.2_
+* _RestSharp v 108.0.3_
+* _TweetinviAPI v 5.0.4_
 * _[The One API](https://the-one-api.dev/)_
-* _[Twitter API v2.0](https://developer.twitter.com/en/docs/twitter-api)_
+* _[Twitter API v 2.0](https://developer.twitter.com/en/docs/twitter-api)_
 
 ## Description
 
@@ -52,12 +52,12 @@ _This is a Twitter Bot using C#/.NET MS EF Core framework that will post randomi
   ```
   * Replace all information in each of the square brackets with _your one API key_, _your twitter api consumer key_, _your twitter api consumer secret_, _your twitter access token_, and _your twitter access secret_.
 * 4. Setting up the necessary accounts:
-**The One API**
+#### **The One API**
   * Create an account on "The One API" via [this link](https://the-one-api.dev/) 
   * Navigate to the webpage and click the 3 horizontal bars on the top right of the screen
   * Select "sign up" and provide your email and password
   * Copy the given "Access token" and paste to the EnvironmentVariables.cs file in the [YOUR-ONE-API-KEY] section
-**Twitter Developer Account**
+#### **Twitter Developer Account**
   * Create a Twitter Developer account via [this link](https://developer.twitter.com/en/docs/twitter-for-websites/tools-and-libraries)
   * Navigate to the top right of the page and select "Developer Portal"
   * Click "sign up" and fill out the necessary fields
@@ -77,13 +77,13 @@ _This is a Twitter Bot using C#/.NET MS EF Core framework that will post randomi
 * 6. Program will continue to run and post a tweet every [hour] until manually exited or limit of API calls per month is reached.
 
 
-
 ## Known Bugs
 
-* _Variables set up in secret file instead of using OAuth_
 * _Twitter's API prevents duplicate tweets within a specific timeframe. Duplicate tweets result in a program error with status code 403._
 * _Twitter limits posts to a maximum of 280 characters. If the randomized movie quote is beyond this limit, our code currently trims the text and adds an ellipses at the end before posting._
-* _The current free version of Twitter API limits the amount of hourly and monthly requests. Visit https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api for more information. Requests in excess of your allotment return a Code 429_
+* _The current free version of Twitter API limits the amount of hourly and monthly requests. Visit https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api for more information. Requests in excess of your allotment return a Code 429._
 
 ## License
 [MIT](https://github.com/ChrisRDavila/The_One_API.Solution/blob/main/License.txt)
+
+_Please reach out to any of us for questions, comments, or concerns: crossdavila@gmail.com, josephwilfong91@gmail.com, Kyungmj@gmail.com, gt.grindeland@gmail.com, lauramhope.dpt@gmail.com_
