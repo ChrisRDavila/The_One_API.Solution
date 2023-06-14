@@ -38,7 +38,7 @@ namespace The_One_API.Models
       return characterQuoteList;
     }
 
-    public string GetRandomGandalfQuote(string apiKey, string gandalfCharId)
+    public static string GetRandomGandalfQuote(string apiKey, string gandalfCharId)
     {
       var apiCallTask = QuotesHelper.GetAllCharQuotes(apiKey, gandalfCharId);
       var result = apiCallTask.Result;

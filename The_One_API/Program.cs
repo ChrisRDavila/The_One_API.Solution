@@ -7,98 +7,59 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 
+using Tweetinvi;
+using Tweetinvi.Models;
+using Tweetinvi.Parameters;
+using Tweetinvi.Core.Web;
+
+using RestSharp;
+using RestSharp.Authenticators;
+using The_One_API.Models;
+
 
 namespace The_One_API
 {
   class Program
-  {
-    static async Task Main(string[] args)
     {
-      
-    
-      var builder = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-      var configuration = builder.Build();
-
-      string consumerKey = configuration["TwitterAPI:ConsumerKey"];
-      string consumerSecret = configuration["TwitterAPI:ConsumerSecret"];
-      string accessToken = configuration["TwitterAPI:AccessToken"];
-      string accessSecret = configuration["TwitterAPI:AccessSecret"];
-
-      var httpClient = new HttpClient();
-      httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessSecret}");
-
-      string tweet = "This is Gandalf!";
-
-      var tweetParameter = new
+      static async Task Main(string[] args)
       {
-        status = tweet
-      };
-
-      var jsonTweet = JsonConvert.SerializeObject(tweetParameter);
-      var httpContent = new StringContent(jsonTweet, Encoding.UTF8, "application/json");
-
-      string apiUrl = "https://api.twitter.com/2/tweets";
-
-      var response = await httpClient.PostAsync(apiUrl, httpContent);
-      string responseContent = await response.Content.ReadAsStringAsync();
-
-      if (response.IsSuccessStatusCode)
-      {
-        Console.WriteLine("Tweet posted successfully.");
+          while (true)
+          {
+              await SendRandomGandalfQuoteTweet();
+              await Task.Delay(TimeSpan.FromMinutes(60));
+          }
       }
-      else
+
+      static async Task SendRandomGandalfQuoteTweet()
       {
-        Console.WriteLine("Tweet failed to post.");
-        Console.WriteLine(responseContent);
+          // Retrieve a random Gandalf quote
+          string randomGandalfQuote = CharacterQuote.GetRandomGandalfQuote(EnvironmentVariables.TheOneApiKey, EnvironmentVariables.GandalfCharId);
+          // string randomGandalfQuote = "It's your boi, Gandalf";
+
+          if (randomGandalfQuote.Length > 279)
+          {
+            randomGandalfQuote = randomGandalfQuote.Substring(0, 276) + "...";
+            Console.WriteLine("The tweet has been trimmed to under 280 characters.");
+            // throw new Exception("Error: this quote is too long to tweet.");
+          }
+          var client = new TwitterClient(EnvironmentVariables.consumerKey, EnvironmentVariables.consumerSecret, EnvironmentVariables.accessToken, EnvironmentVariables.accessSecret);
+
+          var poster = new TweetsV2Poster(client);
+
+          ITwitterResult result = await poster.PostTweet(
+              new TweetV2PostRequest
+              {
+                  Text = randomGandalfQuote
+              }
+          );
+
+          if( result.Response.IsSuccessStatusCode == false )
+          {
+              throw new Exception(
+                  "Error when posting tweet: " + Environment.NewLine + result.Content
+              );
+          }
       }
     }
-  }
 }
 
-
-    // var httpClient = new HttpClient();
-
-    //   Console.WriteLine("Tweet posted successfully.");
-
-    //   Console.ReadLine();
-      // string theOneApiKey = configuration["EnvironmentVariables:TheOneApiKey"];
-      // string gandalfCharId = configuration["EnvironmentVariables:GandalfCharId"];
-      // string username = configuration["EnvironmentVariables:Username"];
-
-
-
-      // var quotesHelper = new QuotesHelper(new System.Net.Http.HttpClient());
-      // var twitterApiHelper = new TwitterApiHelper(consumerKey, consumerSecret, accessToken, accessSecret);
-      // var characterQuote = new CharacterQuote();
-
-      // var connectionString = configuration["ConnectionStrings:DefaultConnection"];
-
-      // var dbContextOptionsBuilder = new DbContextOptionsBuilder<The_One_APIContext>()
-      //   .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-
-      // var dbContext = new The_One_APIContext(dbContextOptionsBuilder.Options);
-
-      // var controller = new TweetsController(dbContext, twitterApiHelper, characterQuote);
-      // string message = "This is Gandalf!";
-      // ITweet tweet = await twitterApiHelper.PostTweet(message);
-
-      // Console.WriteLine(tweet);
-
-      // controller.PostQuote();
-
-      // while (true)
-      // {
-      //   try
-      //   {
-      //     await controller.PostQuote();
-      //   }
-      //   catch (Exception ex)
-      //   {
-      //     Console.WriteLine(ex.Message);
-      //     break;
-      //   }
-      //   await Task.Delay(TimeSpan.FromMinutes(10));
-      // }

@@ -1,12 +1,12 @@
 # The One API
 
-#### This is a twitter bot that posts randomized qoutes from Galndalf the White as per Tolkein related material
+_This application uses a Twitter Bot API that posts randomized quotes from Gandalf the White as per Tolkien-related material_
 
-#### By By Christopher Davila, Joseph Wilfong, Marcus Kyung, Gareth Grindeland and Laura Hope
+#### By **Christopher Davila, Joseph Wilfong, Marcus Kyung, Gareth Grindeland and Laura Hope**
 
 ## Technologies Used
 
-* _dot net 6_
+* _dot net 6.0_
 * _cshtml_
 * _C#_
 * _ASP Core MVC_
@@ -14,12 +14,10 @@
 * _Newtonsoft_
 * _RestSharp_
 * _Tweetinvi_
-* _TweetSharp_
-
 
 ## Description
 
-# This is a Twitter Bot using C# dotnet avc framework that will post randomized qoutes by the character Ganldalf from all JRR Tolkein material. Once mentioned it is set up to post a reply in 10 minutes 
+_This is a Twitter Bot using C# dotnet avc framework that will post randomized quotes by the character Ganldalf from all JRR Tolkein material. Once mentioned it is set up to post a reply in 10 minutes._
 
 ## Setup/Installation Requirements
 
@@ -42,8 +40,8 @@
 
 ## Known Bugs
 
-* _Any known issues_
+* _Variables set up in secret file instead of using Oath_
 * _should go here_
 
 ## License
-[MIT](https://yourlicensepage)
+[MIT](https://github.com/ChrisRDavila/The_One_API.Solution/blob/main/License.txt)
