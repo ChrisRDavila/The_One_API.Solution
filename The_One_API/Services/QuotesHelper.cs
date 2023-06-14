@@ -1,9 +1,4 @@
-using System.Threading.Tasks;
-using System;
 using RestSharp;
-using RestSharp.Authenticators;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace The_One_API.Services
 {

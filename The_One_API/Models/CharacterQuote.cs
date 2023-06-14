@@ -1,8 +1,3 @@
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System;
-using RestSharp;
 using The_One_API.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
