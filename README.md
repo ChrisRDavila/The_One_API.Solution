@@ -29,6 +29,8 @@ _This application uses a Twitter API to post randomized quotes from Gandalf as p
 
 _This is a Twitter Bot using C#/.NET MS EF Core framework that will post randomized quotes by the character Gandalf from the Lord of the Rings trilogy. Once initiated via the command ```dotnet run``` the bot will tweet a Gandalf quote immediately and then again every 60 minutes until the program is closed._
 
+_You can view the tweets [@Gandalf_bot](https://twitter.com/Gandalf_bot)._
+
 ## Setup/Installation Requirements
 
 * 1. Clone "The_One_API.Solution" from the repository to your desktop.
